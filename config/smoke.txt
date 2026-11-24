@@ -1,0 +1,2 @@
+# Contrôles après déploiement : chemin<TAB>texte attendu (scripts/smoke-test.sh)
+/	<html

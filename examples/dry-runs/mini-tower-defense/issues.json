@@ -1,0 +1,110 @@
+{
+ "project": "Mini Tower Defense",
+ "milestones": [
+  "Cadrage",
+  "MVP",
+  "Lancement"
+ ],
+ "issues": [
+  {
+   "title": "[P0] Initialiser le projet (stack node, fr/en)",
+   "labels": [
+    "agent:auto",
+    "priority:P0",
+    "phase:cadrage",
+    "type:feature"
+   ],
+   "body": "## Objectif\n\nRendre le dépôt conforme au contrat universel avec la stack node.\n\n## Périmètre\n\n- `python3 scripts/init_project.py --name \"Mini Tower Defense\" --slug mini-td --repo OWNER/mini-td --stack node --domain td.example.org --port 8710`\n- recopier plan/brief.md dans PROJECT_GUIDE.md et plan/architecture.md dans docs/ARCHITECTURE.md\n\n## Critères d'acceptation\n\n- [ ] `bash scripts/check-contract.sh` vert en local et en CI\n- [ ] aucun placeholder restant (`scripts/check_repo.py`)\n- [ ] `/healthz` rend le SHA\n\n## Hors périmètre\n\n- tout ce qui n’est pas listé ci-dessus\n\n## Dépendances\n\naucune\n"
+  },
+  {
+   "title": "[P0] Notifications e-mail testées (START, PR READY, DEPLOYED, BLOCKED, FAILED, REPRISE)",
+   "labels": [
+    "agent:auto",
+    "priority:P0",
+    "phase:cadrage",
+    "type:ops"
+   ],
+   "body": "## Objectif\n\nProuver le flux d'e-mails de l'orchestrateur avant toute fonctionnalité.\n\n## Périmètre\n\n- configuration documentée hors Git\n- tests avec transport factice et faux SMTP\n\n## Critères d'acceptation\n\n- [ ] les six évènements sont produits avec leurs champs obligatoires\n- [ ] aucun secret dans les messages ni le journal\n- [ ] e-mail de test réel reçu par le propriétaire (preuve en commentaire)\n\n## Hors périmètre\n\n- tout ce qui n’est pas listé ci-dessus\n\n## Dépendances\n\nDépend de #1\n"
+  },
+  {
+   "title": "[P1] Boucle de jeu Canvas 2D et grille de la carte",
+   "labels": [
+    "agent:auto",
+    "priority:P1",
+    "phase:mvp",
+    "type:feature"
+   ],
+   "body": "## Objectif\n\nAfficher une carte en grille avec un chemin et une boucle de jeu à pas de temps fixe.\n\n## Périmètre\n\n- Canvas 2D, requestAnimationFrame, logique séparée du rendu\n- redimensionnement 360 px → bureau\n\n## Critères d'acceptation\n\n- [ ] logique testée sans navigateur (déterminisme d'un pas de simulation)\n- [ ] fluide sur mobile moyen\n- [ ] pause si l'onglet est masqué\n\n## Hors périmètre\n\n- tout ce qui n’est pas listé ci-dessus\n\n## Dépendances\n\nDépend de #1\n"
+  },
+  {
+   "title": "[P1] Vagues d'ennemis déterministes",
+   "labels": [
+    "agent:auto",
+    "priority:P1",
+    "phase:mvp",
+    "type:feature"
+   ],
+   "body": "## Objectif\n\nGénérer des vagues d'ennemis suivant le chemin, de difficulté croissante.\n\n## Périmètre\n\n- définition des vagues en JSON\n- graine aléatoire fixe par partie\n\n## Critères d'acceptation\n\n- [ ] même graine → même partie (test)\n- [ ] 10 vagues jouables\n\n## Hors périmètre\n\n- tout ce qui n’est pas listé ci-dessus\n\n## Dépendances\n\nDépend de #3\n"
+  },
+  {
+   "title": "[P1] Tours : placement, tir, amélioration",
+   "labels": [
+    "agent:auto",
+    "priority:P1",
+    "phase:mvp",
+    "type:feature"
+   ],
+   "body": "## Objectif\n\nPlacer 3 types de tours sur les cases libres, au toucher, à la souris et au clavier.\n\n## Périmètre\n\n- coût, portée, cadence, amélioration\n- cibles tactiles ≥ 44 px\n\n## Critères d'acceptation\n\n- [ ] placement interdit sur le chemin (test)\n- [ ] jouable au clavier\n- [ ] lisible à 360 px\n\n## Hors périmètre\n\n- tout ce qui n’est pas listé ci-dessus\n\n## Dépendances\n\nDépend de #3\n"
+  },
+  {
+   "title": "[P1] Interface : menus, pause, fin de partie, fr/en, accessibilité",
+   "labels": [
+    "agent:auto",
+    "priority:P1",
+    "phase:mvp",
+    "type:feature"
+   ],
+   "body": "## Objectif\n\nÉcrans d'accueil, pause, victoire/défaite, réglages (son, mouvement réduit), en fr et en.\n\n## Périmètre\n\n- i18n public/i18n/*.json\n- prefers-reduced-motion\n\n## Critères d'acceptation\n\n- [ ] contraste AA\n- [ ] navigation clavier complète\n- [ ] toutes les chaînes traduites\n\n## Hors périmètre\n\n- tout ce qui n’est pas listé ci-dessus\n\n## Dépendances\n\nDépend de #5\n"
+  },
+  {
+   "title": "[P2] Meilleurs scores sans compte, validés côté serveur",
+   "labels": [
+    "agent:auto",
+    "priority:P2",
+    "phase:mvp",
+    "type:feature"
+   ],
+   "body": "## Objectif\n\nEnregistrer un pseudo et un score sans compte, avec validation serveur minimale.\n\n## Périmètre\n\n- API POST /api/scores, SQLite sous $APP_DATA_DIR\n- durée minimale de partie, bornes, limitation de débit\n\n## Critères d'acceptation\n\n- [ ] score impossible refusé (test)\n- [ ] aucune donnée personnelle hors pseudo\n- [ ] suppression d'un score sur demande documentée\n\n## Hors périmètre\n\n- tout ce qui n’est pas listé ci-dessus\n\n## Dépendances\n\nDépend de #4\n"
+  },
+  {
+   "title": "[P1] Préparer l'hébergement (unité, sauvegarde, vhost) : commandes root",
+   "labels": [
+    "agent:human",
+    "priority:P1",
+    "phase:lancement",
+    "type:ops"
+   ],
+   "body": "## Objectif\n\nFournir au propriétaire les commandes root exactes du profil A de docs/DEPLOYMENT.md.\n\n## Périmètre\n\n- utilisateur mini-td, /srv/mini-td/releases, /var/lib/mini-td\n- unité durcie, timer de sauvegarde, vhost dédié + certificat\n\n## Critères d'acceptation\n\n- [ ] commandes relues et exécutées par le propriétaire\n- [ ] `systemctl status mini-td` actif\n- [ ] `scripts/restore-test.sh` vert sur la première archive\n\n## Hors périmètre\n\n- tout ce qui n’est pas listé ci-dessus\n\n## Dépendances\n\naucune\n"
+  },
+  {
+   "title": "[P1] DNS td.example.org vers le serveur",
+   "labels": [
+    "agent:human",
+    "priority:P1",
+    "phase:lancement",
+    "type:ops"
+   ],
+   "body": "## Objectif\n\nCréer l'enregistrement DNS chez le registraire.\n\n## Périmètre\n\n- enregistrement A vers l'IP fixe\n\n## Critères d'acceptation\n\n- [ ] `dig +short td.example.org` = IP du serveur\n\n## Hors périmètre\n\n- tout ce qui n’est pas listé ci-dessus\n\n## Dépendances\n\naucune\n"
+  },
+  {
+   "title": "[P1] Premier déploiement et smoke public",
+   "labels": [
+    "agent:auto",
+    "priority:P1",
+    "phase:lancement",
+    "type:ops"
+   ],
+   "body": "## Objectif\n\nDéployer main et vérifier l'URL publique.\n\n## Périmètre\n\n- DEPLOY_CMD, PUBLIC_URL, config/smoke.txt\n\n## Critères d'acceptation\n\n- [ ] `/healthz` public = SHA fusionné\n- [ ] smoke OK\n- [ ] e-mail DEPLOYED reçu\n\n## Hors périmètre\n\n- tout ce qui n’est pas listé ci-dessus\n\n## Dépendances\n\nDépend de #8 et #9\n"
+  }
+ ]
+}

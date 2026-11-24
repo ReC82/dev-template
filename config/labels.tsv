@@ -1,0 +1,19 @@
+# nom<TAB>couleur<TAB>description — créés par scripts/github_bootstrap.py
+agent:auto	0e8a16	File automatique : l'orchestrateur peut prendre ce ticket
+agent:human	d93f0b	Action humaine (droits, DNS, root, secrets, coûts) : jamais pris par l'orchestrateur
+agent:blocked	b60205	Bloqué : réponse du propriétaire attendue, retirer le label pour relancer
+agent:in-progress	fbca04	Pris en charge par l'orchestrateur
+agent:approved	5319e7	Propriétaire : chemins protégés approuvés pour la fusion
+agent:no-merge	000000	Ne jamais fusionner automatiquement
+priority:P0	b60205	Urgent
+priority:P1	d93f0b	Important
+priority:P2	c5def5	Normal
+status:merged	1d76db	Fusionné (pas forcément déployé)
+status:deployed	0e8a16	Déployé et vérifié publiquement
+type:feature	a2eeef	Fonctionnalité
+type:bug	d73a4a	Anomalie
+type:ops	bfdadc	Exploitation / infrastructure
+type:design	f9d0c4	Identité visuelle, UX
+phase:cadrage	ededed	Phase 0 : cadrage
+phase:mvp	ededed	Phase 1 : MVP
+phase:lancement	ededed	Phase 2 : mise en ligne

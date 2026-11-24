@@ -1,0 +1,23 @@
+# CI : exactement la porte locale de l'orchestrateur (scripts/check-contract.sh), sans secret.
+# Le déploiement n'est PAS fait ici (aucune clé de serveur dans GitHub) : voir docs/DEPLOYMENT.md.
+name: ci
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Porte locale
+        run: bash scripts/check-contract.sh

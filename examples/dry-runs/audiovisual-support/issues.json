@@ -1,0 +1,101 @@
+{
+ "project": "Site de support audiovisuel",
+ "milestones": [
+  "Cadrage",
+  "Identité",
+  "MVP",
+  "Lancement"
+ ],
+ "issues": [
+  {
+   "title": "[P0] Initialiser le projet (stack static, fr/en)",
+   "labels": [
+    "agent:auto",
+    "priority:P0",
+    "phase:cadrage",
+    "type:feature"
+   ],
+   "body": "## Objectif\n\nRendre le dépôt conforme au contrat universel avec la stack static.\n\n## Périmètre\n\n- `python3 scripts/init_project.py --name \"Studio Support AV\" --slug support-av --repo OWNER/support-av --stack static --domain support-av.example.org`\n\n## Critères d'acceptation\n\n- [ ] `bash scripts/check-contract.sh` vert en local et en CI\n- [ ] aucun placeholder restant\n\n## Hors périmètre\n\n- tout ce qui n’est pas listé ci-dessus\n\n## Dépendances\n\naucune\n"
+  },
+  {
+   "title": "[P0] Notifications e-mail testées (START, PR READY, DEPLOYED, BLOCKED, FAILED, REPRISE)",
+   "labels": [
+    "agent:auto",
+    "priority:P0",
+    "phase:cadrage",
+    "type:ops"
+   ],
+   "body": "## Objectif\n\nProuver le flux d'e-mails avant toute fonctionnalité.\n\n## Périmètre\n\n- transport factice et faux SMTP en test\n\n## Critères d'acceptation\n\n- [ ] six évènements avec champs obligatoires\n- [ ] e-mail de test réel reçu (preuve)\n\n## Hors périmètre\n\n- tout ce qui n’est pas listé ci-dessus\n\n## Dépendances\n\nDépend de #1\n"
+  },
+  {
+   "title": "[P1] Brief d'identité visuelle et trois pistes de logo",
+   "labels": [
+    "agent:human",
+    "priority:P1",
+    "phase:cadrage",
+    "type:design"
+   ],
+   "body": "## Objectif\n\nChoisir une piste de logo parmi trois propositions générées par IA (docs/BRANDING.md).\n\n## Périmètre\n\n- brief : valeurs, public, ton, références\n- trois pistes avec palette\n\n## Critères d'acceptation\n\n- [ ] piste choisie écrite dans ce ticket par le propriétaire\n- [ ] aucune ressemblance avec une marque existante\n\n## Hors périmètre\n\n- tout ce qui n’est pas listé ci-dessus\n\n## Dépendances\n\naucune\n"
+  },
+  {
+   "title": "[P1] Intégrer le logo validé, favicon et palette",
+   "labels": [
+    "agent:auto",
+    "priority:P1",
+    "phase:mvp",
+    "type:design"
+   ],
+   "body": "## Objectif\n\nProduire le SVG propre et ses déclinaisons à partir de la piste validée.\n\n## Périmètre\n\n- logo, mono, inverse, favicon, apple-touch-icon, og-image\n- jetons de couleur dans styles.css\n- BRAND_ASSETS.md : créé ou placeholder pour chaque élément\n\n## Critères d'acceptation\n\n- [ ] contraste AA texte/couleurs de marque\n- [ ] lisible à 16 px\n\n## Hors périmètre\n\n- tout ce qui n’est pas listé ci-dessus\n\n## Dépendances\n\nDépend de #3\n"
+  },
+  {
+   "title": "[P1] Pages Accueil, Services, Réalisations, Contact (fr/en)",
+   "labels": [
+    "agent:auto",
+    "priority:P1",
+    "phase:mvp",
+    "type:feature"
+   ],
+   "body": "## Objectif\n\nPrésenter l'offre de support audiovisuel (captation, régie, location, assistance).\n\n## Périmètre\n\n- pages statiques bilingues\n- galerie d'images optimisées (WebP, chargement différé)\n\n## Critères d'acceptation\n\n- [ ] mobile 360 px\n- [ ] navigation clavier\n- [ ] aucune ressource tierce\n\n## Hors périmètre\n\n- tout ce qui n’est pas listé ci-dessus\n\n## Dépendances\n\nDépend de #1\n"
+  },
+  {
+   "title": "[P1] Décider du formulaire de contact (sans service payant)",
+   "labels": [
+    "agent:human",
+    "priority:P1",
+    "phase:mvp",
+    "type:feature"
+   ],
+   "body": "## Objectif\n\nDécider comment recevoir les demandes : lien mailto, ou petit service avec SMTP et anti-spam.\n\n## Périmètre\n\n- option recommandée : mailto + téléphone (aucune donnée stockée)\n\n## Critères d'acceptation\n\n- [ ] décision écrite du propriétaire ; si service : nouvelle issue agent:auto avec limitation de débit et consentement\n\n## Hors périmètre\n\n- tout ce qui n’est pas listé ci-dessus\n\n## Dépendances\n\naucune\n"
+  },
+  {
+   "title": "[P2] Mentions légales et politique de confidentialité",
+   "labels": [
+    "agent:auto",
+    "priority:P2",
+    "phase:mvp",
+    "type:feature"
+   ],
+   "body": "## Objectif\n\nPublier les pages légales à partir des informations fournies par le propriétaire.\n\n## Périmètre\n\n- éditeur, hébergeur, données traitées\n\n## Critères d'acceptation\n\n- [ ] pages fr/en liées en pied de page\n\n## Hors périmètre\n\n- tout ce qui n’est pas listé ci-dessus\n\n## Dépendances\n\nDépend de #5\n"
+  },
+  {
+   "title": "[P1] Hébergement statique et DNS support-av.example.org",
+   "labels": [
+    "agent:human",
+    "priority:P1",
+    "phase:lancement",
+    "type:ops"
+   ],
+   "body": "## Objectif\n\nChoisir le profil B de docs/DEPLOYMENT.md et créer l'enregistrement DNS.\n\n## Périmètre\n\n- dossier servi, vhost + certificat ou hébergement statique validé\n\n## Critères d'acceptation\n\n- [ ] `dig +short` correct\n- [ ] `curl -sSI https://support-av.example.org/` en 200\n\n## Hors périmètre\n\n- tout ce qui n’est pas listé ci-dessus\n\n## Dépendances\n\naucune\n"
+  },
+  {
+   "title": "[P1] Premier déploiement et smoke public",
+   "labels": [
+    "agent:auto",
+    "priority:P1",
+    "phase:lancement",
+    "type:ops"
+   ],
+   "body": "## Objectif\n\nPublier dist/ et vérifier l'URL publique.\n\n## Périmètre\n\n- DEPLOY_CMD (copie atomique de dist/)\n\n## Critères d'acceptation\n\n- [ ] `/healthz` public = SHA fusionné\n- [ ] smoke OK\n- [ ] e-mail DEPLOYED reçu\n\n## Hors périmètre\n\n- tout ce qui n’est pas listé ci-dessus\n\n## Dépendances\n\nDépend de #8\n"
+  }
+ ]
+}

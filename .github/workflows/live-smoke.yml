@@ -1,0 +1,23 @@
+# Vérification publique planifiée (lecture seule). Variable de dépôt PUBLIC_URL (pas un secret).
+# Échec visible dans l'onglet Actions ; GitHub prévient le propriétaire par e-mail.
+name: live-smoke
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    if: vars.PUBLIC_URL != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Smoke public
+        run: bash scripts/smoke-test.sh "${{ vars.PUBLIC_URL }}" "" config/smoke.txt
+      - name: Certificat valide plus de 14 jours
+        run: |
+          host="$(printf '%s' "${{ vars.PUBLIC_URL }}" | sed -E 's#https?://([^/]+).*#\1#')"
+          end="$(echo | openssl s_client -servername "$host" -connect "$host:443" 2>/dev/null | openssl x509 -noout -enddate | cut -d= -f2)"
+          [ "$(date -d "$end" +%s)" -gt "$(date -d '+14 days' +%s)" ]

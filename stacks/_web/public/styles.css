@@ -1,0 +1,22 @@
+/* Base mobile d'abord (360 px), contraste AA, cibles ≥ 44 px, focus visible, mouvement réduit.
+   Jetons de couleur à remplacer par la charte validée (docs/BRANDING.md). */
+:root {
+  --bg: #ffffff; --fg: #1a1a1a; --brand: #1f3a5f; --brand-fg: #ffffff; --muted: #4a4a4a; --focus: #b35c00;
+  --radius: 10px; --gap: 1rem;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.5;
+}
+@media (prefers-color-scheme: dark) { :root { --bg: #121417; --fg: #f1f1f1; --muted: #c4c4c4; --brand: #9cc3f5; --brand-fg: #0b1320; } }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); }
+.skip { position: absolute; left: -999px; }
+.skip:focus { left: var(--gap); top: var(--gap); background: var(--bg); padding: .5rem; }
+.bar { display: flex; align-items: center; justify-content: space-between; gap: var(--gap); padding: .5rem var(--gap); min-height: 56px; }
+.brand { display: inline-flex; align-items: center; gap: .5rem; color: inherit; text-decoration: none; font-weight: 700; min-height: 44px; }
+#langs { display: flex; gap: .25rem; }
+button, .button { min-width: 44px; min-height: 44px; border-radius: var(--radius); border: 2px solid var(--brand); background: transparent; color: var(--fg); font: inherit; cursor: pointer; }
+button[aria-pressed="true"] { background: var(--brand); color: var(--brand-fg); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+main { padding: var(--gap); max-width: 60rem; margin: 0 auto; }
+h1 { font-size: clamp(1.5rem, 6vw, 2.5rem); margin: .5rem 0; }
+p { color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }

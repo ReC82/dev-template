@@ -1,0 +1,12 @@
+# Copié en .gitignore à la publication du modèle
+node_modules/
+__pycache__/
+.venv/
+data/
+dist/
+REVISION
+.env
+*.pem
+*.key
+.orch-state/
+orch-prep/
