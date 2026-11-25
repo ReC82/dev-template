@@ -3,7 +3,28 @@
 # Usage : scripts/check-contract.sh [PORT]   (port d'essai, défaut : libre choisi automatiquement)
 set -euo pipefail
 cd "$(dirname "$0")/.."
-[ -x scripts/gate.sh ] || { echo "✗ scripts/gate.sh absent : lancer d'abord scripts/init-project.sh"; exit 1; }
+# Dépôt modèle pas encore initialisé (le dépôt dev-template lui-même, ou « Use this template » avant
+# scripts/init_project.py) : pas de porte de stack à lancer. On vérifie la structure, puis que chaque
+# stack s'initialise proprement dans une copie temporaire. La CI du modèle reste ainsi verte.
+if [ ! -e .devtemplate/project.env ] && [ -d stacks ]; then
+  python3 scripts/check_repo.py
+  work="$(mktemp -d)"
+  trap 'rm -rf "$work"' EXIT
+  for stack in node python static other; do
+    mkdir "$work/$stack"
+    tar --exclude=./.git --exclude=./node_modules -cf - . | tar -xf - -C "$work/$stack"
+    python3 "$work/$stack/scripts/init_project.py" --name "Essai $stack" --slug "essai-$stack" \
+      --repo "owner/essai-$stack" --stack "$stack" > "$work/$stack.log" 2>&1 \
+      || { cat "$work/$stack.log"; echo "✗ initialisation de la stack $stack impossible"; exit 1; }
+    python3 "$work/$stack/scripts/check_repo.py" "$work/$stack" > /dev/null \
+      || { echo "✗ stack $stack : dépôt initialisé non conforme"; exit 1; }
+    [ -x "$work/$stack/scripts/gate.sh" ] || { echo "✗ stack $stack : scripts/gate.sh absent"; exit 1; }
+    echo "✓ stack $stack : initialisation conforme"
+  done
+  echo "✓ modèle non initialisé : structure et initialisation vérifiées (lancer scripts/init_project.py pour la porte complète)"
+  exit 0
+fi
+[ -x scripts/gate.sh ] || { echo "✗ scripts/gate.sh absent : lancer d'abord scripts/init_project.py"; exit 1; }
 python3 scripts/check_repo.py
 bash scripts/gate.sh
 port="${1:-$(python3 -c 'import socket; s=socket.socket(); s.bind(("127.0.0.1",0)); print(s.getsockname()[1])')}"

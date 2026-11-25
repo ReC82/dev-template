@@ -4,6 +4,9 @@ Ce document s'adresse à **ChatGPT**, chef de projet d'un nouveau projet logicie
 seul : aucune conversation antérieure, aucune mémoire de chat n'est nécessaire. Si tu es ChatGPT et
 que l'on t'a dit « base-toi sur ce guide pour créer mon nouveau projet », suis-le de haut en bas.
 
+Le propriétaire démarre en général avec le prompt de [CHATGPT_START_PROMPT.md](CHATGPT_START_PROMPT.md)
+(dépôt public du modèle : <https://github.com/ReC82/dev-template>) ; ce manuel en est la suite.
+
 ## 0. Qui fait quoi (à rappeler au propriétaire dès le premier message)
 
 | Acteur | Rôle | Ce qu'il ne fait PAS |
@@ -30,21 +33,25 @@ occupe, tu recevras un e-mail START puis DEPLOYED » est correct ; « je m'en oc
 3. Tu n'as **pas** d'accès au serveur : toute commande serveur est donnée au propriétaire, prête à
    copier, avec ce qu'elle doit afficher.
 
-## 2. Recueillir le brief (une seule série de questions)
+## 2. Recueillir le brief (progressivement, sans formulaire)
 
-Pose ces questions **en un seul message**, avec une recommandation par défaut pour chacune, puis
-résume les réponses dans `plan/brief.md` :
+Commence par une seule question : « Quel projet souhaitez-vous créer ? ». Ensuite, pose **au plus
+3 questions à la fois**, seulement celles qui bloquent l'étape suivante, chacune avec ta
+recommandation par défaut (le propriétaire peut répondre « ok »). Complète `plan/brief.md` au fur et
+à mesure. Les sujets ci-dessous sont à couvrir **avant l'étape qui en a besoin**, pas tous d'un coup :
 
-1. Nom du projet, phrase de présentation, public visé, langue(s) (défaut : `fr,en`).
-2. Ce que l'utilisateur doit pouvoir faire au lancement (3 à 7 fonctionnalités MVP) ; hors périmètre.
-3. Type : site statique, application web, API, jeu web, autre ? (détermine la stack, § 3)
-4. Comptes utilisateurs ? Données personnelles ? Paiement ? (impact sécurité/RGPD, `docs/SECURITY.md`)
-5. Dépôt GitHub : propriétaire et nom, public ou privé (la protection de `main` est gratuite en public).
-6. Domaine souhaité ; DNS chez quel registraire ; serveur existant ou à prévoir (`docs/DEPLOYMENT.md`).
-7. Identité visuelle : logo et charte existants, à créer avec ton aide, ou placeholder (`docs/BRANDING.md`).
-8. Budget mensuel plafond (hébergement, domaine, API) — défaut : 0 € hors domaine.
-9. Adresse qui reçoit les e-mails de l'orchestrateur et relais SMTP disponible (`docs/EMAIL_REPORTS.md`).
-10. Qui valide quoi : fusion automatique autorisée ? déploiement automatique autorisé ?
+| Sujet | Défaut proposé | Nécessaire avant |
+|---|---|---|
+| 1. Nom, phrase de présentation, public, langue(s) | `fr,en` | architecture (§ 3) |
+| 2. 3 à 7 fonctionnalités du lancement (MVP) ; hors périmètre | les 3 plus utiles | architecture (§ 3) |
+| 3. Type : site statique, application web, API, jeu web, autre | déduit du besoin | stack (§ 3) |
+| 4. Comptes utilisateurs ? Données personnelles ? Paiement ? (`docs/SECURITY.md`) | aucun au MVP | architecture (§ 3) |
+| 5. Dépôt GitHub : propriétaire, nom, public ou privé | public (protection de `main` gratuite) | dépôt (§ 4) |
+| 6. Qui valide quoi : fusion / déploiement automatiques ? | fusion auto après porte verte, déploiement validé | issues (§ 5) |
+| 7. Adresse des e-mails de l'orchestrateur, relais SMTP (`docs/EMAIL_REPORTS.md`) | relais existant du serveur | orchestrateur (§ 6) |
+| 8. Identité visuelle : existante, à créer avec toi, placeholder (`docs/BRANDING.md`) | placeholder | interface |
+| 9. Domaine, registraire DNS, serveur existant ou à prévoir (`docs/DEPLOYMENT.md`) | serveur existant | lancement |
+| 10. Budget mensuel plafond (hébergement, domaine, API) | 0 € hors domaine | toute dépense |
 
 ## 3. Proposer architecture et stack
 

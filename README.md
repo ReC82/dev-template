@@ -11,16 +11,13 @@ créer un projet logiciel de A à Z avec quatre acteurs aux rôles séparés :
 
 ## Démarrer depuis un nouveau Projet ChatGPT
 
-1. Créer un Projet ChatGPT et y coller les instructions de `docs/CHATGPT_PROJECT_SETUP.md`.
-2. Envoyer le prompt initial :
+**→ [CHATGPT_START_PROMPT.md](CHATGPT_START_PROMPT.md) : le prompt de démarrage, un seul bloc à copier.**
 
-   ```
-   Base-toi sur START_HERE.md du dépôt OWNER/dev-template pour créer mon nouveau projet.
-   Commence par me dire ce que tes outils GitHub te permettent, puis pose-moi en un seul message
-   les questions du brief. Mon idée : <décrire le projet>.
-   ```
-
-3. Suivre les étapes que ChatGPT donne ; il s'appuie sur [START_HERE.md](START_HERE.md).
+1. Créer un Projet ChatGPT et coller ce bloc dans ses **instructions** (ou comme premier message) ;
+   joindre `START_HERE.md` et les documents listés (pas à pas : [docs/CHATGPT_PROJECT_SETUP.md](docs/CHATGPT_PROJECT_SETUP.md)).
+2. ChatGPT lit le modèle, dit ce que ses outils lui permettent, puis demande
+   « Quel projet souhaitez-vous créer ? » et cadre le projet par petites questions.
+3. Il suit ensuite [START_HERE.md](START_HERE.md) jusqu'au projet livré et testable.
 
 ## Prérequis
 
@@ -36,6 +33,7 @@ créer un projet logiciel de A à Z avec quatre acteurs aux rôles séparés :
 
 | Chemin | Rôle |
 |---|---|
+| [CHATGPT_START_PROMPT.md](CHATGPT_START_PROMPT.md) | Prompt de démarrage ChatGPT A→Z, prêt à copier |
 | [START_HERE.md](START_HERE.md) | Manuel complet pour ChatGPT : brief, stack, dépôt, issues, orchestrateur, suivi, reprise |
 | [AGENTS.md](AGENTS.md), [CLAUDE.md](CLAUDE.md) | Règles de toute session de développement |
 | [PROJECT_GUIDE.md](PROJECT_GUIDE.md) | Règles produit du projet (rempli à l'initialisation) |
